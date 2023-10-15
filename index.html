@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quiz</title>
+
+        <style>
+            body {
+                background-image: url("file:///C:/Users/WassupBaby/Downloads/pexels-pixabay-36717.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            /* From HTML */
+            #box {
+                height: 400px;
+                width: 500px;
+                background-color: rgb(0, 160, 235);
+                left: 0;
+                right: 0;
+                margin: auto;
+                top: 20%;
+                position: absolute;
+                border: 10px solid rgb(111, 0, 255);
+                border-radius: 10px;
+            }
+
+            #playContainer {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                height: fit-content;
+                width: 100%;
+            }
+
+            #playBtn {
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: fit-content;
+                font-size: 20px;
+                padding: 2px 15px 2px 15px;
+                border-radius: 5px;
+                border: solid 1px royalblue;
+                background-color: green;
+                color: white;
+                cursor: pointer;
+                transition: all .5s;
+            }
+
+            #playBtn:hover {
+                background-color: white;
+                color: green;
+                letter-spacing: 3px;
+
+            }
+
+            #infoContainer {
+                top: 85%;
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: fit-content;
+            }
+
+            #infoBtn {
+                font-size: 17px;
+                background-color: black;
+                color: white;
+                border-radius: 5px;
+                border: solid black 1px;
+                padding: 2px 10px 2px 10px;
+                transition: all .5s;
+                cursor: pointer;
+            }
+
+            #infoBtn:hover {
+                background-color: white;
+                color: black;
+            }
+
+            /* From Javascript/DOM */
+            #backContainer {
+                top: 85%;
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: fit-content;
+            }
+
+            #backBtn {
+                font-size: 17px;
+                background-color: black;
+                color: white;
+                border-radius: 5px;
+                border: solid black 1px;
+                padding: 2px 10px 2px 10px;
+                transition: all .5s;
+                cursor: pointer;
+            }
+
+            #backBtn:hover {
+                background-color: white;
+                color: black;
+            }
+
+            #textContainer {
+                background-color: black;
+                padding: 10px 0px 10px 0px;
+            }
+
+            #text {
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                color: white;
+            }
+
+            #container {
+                text-align: center;
+            }
+
+            #subject {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                border-bottom: solid black 3px;
+                width: fit-content;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            #qNumber {
+                margin-top: -3%;
+            }
+
+            #question {
+                margin-top: -2%;
+                font-weight: lighter;
+                color: white;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .input {
+                width: 10%;
+                display: block;
+                margin: auto;
+                height: 20px;
+                font-size: 20px;
+                text-align: center;
+                outline: none;
+                background-color: rgb(0, 160, 235);
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: black solid 1px;
+            }
+
+            .input[type="number"]::-webkit-inner-spin-button,
+            .input[type="number"]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+            }
+
+            #nextBtnContainer {
+                position: absolute;
+                top: 40%;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            #nextBtn {
+                display: block;
+                margin: auto;
+                font-size: 15px;
+                border-radius: 5px;
+                padding: 2px 15px 2px 15px;
+                border: solid black 1px;
+                background-color: green;
+                color: white;
+                cursor: pointer;
+                transition: all .5s;
+            }
+
+            #nextBtn:hover {
+                background-color: white;
+                color: green;
+            }
+
+            #submitbtncontainer {
+                position: absolute;
+                top: 50%;
+                width: fit-content;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            #submitbtn {
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 15px;
+                border-radius: 5px;
+                padding: 2px 15px 2px 15px;
+                border: solid black 1px;
+                background-color: white;
+                color: black;
+                cursor: pointer;
+                transition: all .5s;
+            }
+
+            #submitbtn:hover {
+                background-color: black;
+                color: white;
+            }
+
+            #addResult {
+                position: absolute;
+                width: fit-content;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            #subjectResult {
+                border-bottom: 2px solid black;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #addResText {
+                margin-top: -15%;
+            }
+
+            #subResult {
+                position: absolute;
+                width: fit-content;
+                left: 0;
+                right: 0;
+                margin: auto;
+                top: 15%;
+            }
+
+            #substractionsubjectResult {
+                border-bottom: 2px solid black;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #subResText {
+                margin-top: -10%;
+                text-align: center;
+            }
+
+            #multiResult {
+                position: absolute;
+                width: fit-content;
+                left: 0;
+                right: 0;
+                margin: auto;
+                top: 30%;
+            }
+
+            #multiplicationSubjectResult {
+                border-bottom: 2px solid black;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #multiResText {
+                margin-top: -10%;
+                text-align: center;
+            }
+
+            #divisionResult {
+                position: absolute;
+                width: fit-content;
+                left: 0;
+                right: 0;
+                margin: auto;
+                top: 45%;
+            }
+
+            #divisionSubjectResult {
+                border-bottom: 2px solid black;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #divisionTextRes {
+                margin-top: -10%;
+                text-align: center;
+            }
+
+            #totalResultDiv {
+                position: absolute;
+                width: fit-content;
+                left: 0;
+                right: 0;
+                margin: auto;
+                top: 60%;
+            }
+
+            #totalResultTitle {
+                border-bottom: 2px solid black;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #totalResultText {
+                margin-top: -10%;
+                text-align: center;
+            }
+
+            #mainMenuDiv {
+                position: absolute;
+                width: fit-content;
+                left: 0;
+                right: 0;
+                margin: auto;
+                top: 80%;
+            }
+
+            #mainMenuBtn {
+                margin-left: auto;
+                margin-right: auto;
+                padding: 5px 15px 5px 15px;
+                background-color: green;
+                color: white;
+                border: solid black 1px;
+                border-radius: 5px;
+                transition: all .5s;
+                cursor: pointer;
+            }
+
+            #mainMenuBtn:hover {
+                background-color: white;
+                color: green;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div id="box">
+            <div id="playContainer">
+                <button id="playBtn">Play</button>
+            </div>
+
+            <div id="infoContainer">
+                <button id="infoBtn">Info</button>
+            </div>
+        </div>
+
+        <script>
+            let box = document.getElementById("box");
+            let playBtn = document.getElementById("playBtn");
+            let infoBtn = document.getElementById("infoBtn");
+            let playContainer = document.getElementById("playContainer");
+            let infoContainer = document.getElementById("infoContainer");
+
+            // Play button
+            playBtn.addEventListener("click", function() {
+
+                box.removeChild(playContainer);
+                box.removeChild(infoContainer);
+
+                let nextBtnContainer = document.createElement("div");
+                nextBtnContainer.setAttribute("id", "nextBtnContainer");
+                box.appendChild(nextBtnContainer);
+
+                let nextBtn = document.createElement("button");
+                nextBtn.setAttribute("id", "nextBtn");
+                nextBtn.innerText = "Next";
+                nextBtnContainer.appendChild(nextBtn);
+
+                let submitBtnContainer = document.createElement("div");
+                submitBtnContainer.setAttribute("id", "submitbtncontainer");
+                box.appendChild(submitBtnContainer);
+
+                let submitBtn = document.createElement("button");
+                submitBtn.setAttribute("id", "submitbtn");
+                submitBtn.innerText = "Submit";
+                submitBtnContainer.appendChild(submitBtn);
+
+                let qCounter = 1
+                let wrongAcounter = 0
+                let rightAcounter = 0
+                let additionPoints = 0
+                let substractionPoints = 0
+                let multiplicationPoints = 0
+                let divisionPoints = 0
+
+                //addition
+                let xA = Math.floor(Math.random() * 1000);
+                let yA = Math.floor(Math.random() * 1000);
+                let correctA = xA + yA
+
+                let container = document.createElement("div");
+                container.setAttribute("id", "container");
+                box.appendChild(container);
+
+                let subject = document.createElement("h3");
+                subject.setAttribute("id", "subject");
+                subject.innerText = "Addition";
+                container.appendChild(subject);
+
+                let qNumber = document.createElement("h3");
+                qNumber.setAttribute("id", "qNumber");
+                qNumber.innerText = "Question " + qCounter + " of " + " 20";
+                container.appendChild(qNumber);
+
+                let question = document.createElement("h4");
+                question.setAttribute("id", "question");
+                question.innerText = "What is " + xA + " + " + yA + " = ?";
+                container.appendChild(question);
+
+                let inputContainer = document.createElement("div");
+                inputContainer.setAttribute("id", "inputcontainer");
+                box.appendChild(inputContainer);
+
+                let input = document.createElement("input");
+                input.setAttribute("type", "number");
+                input.setAttribute("placeholder", "0000")
+                input.classList.add("input");
+                inputContainer.appendChild(input);
+
+                let isSubmitted = false
+
+                nextBtn.addEventListener("click", () => {
+
+                    input.value = ""
+
+                    xA = Math.floor(Math.random() * 1000);
+                    yA = Math.floor(Math.random() * 1000);
+                    let newcorrectA = xA + yA
+                    correctA = newcorrectA
+
+                    qCounter += 1
+                    qNumber.innerText = "Question " + qCounter + " of " + "20";
+
+                    question.innerText = "What is " + xA + " + " + yA + " = ?";
+
+                    box.appendChild(submitBtnContainer)
+
+                    if (qCounter > 5) {
+                        subject.innerText = "Substraction";
+                        newcorrectA = xA - yA
+                        correctA = newcorrectA
+                        question.innerText = "What is " + xA + " - " + yA + " = ?";
+
+                    } 
+                    
+                    if (qCounter > 10) {
+                        xA = Math.floor((Math.random() * 10) + 1);
+                        yA = Math.floor((Math.random() * 10) + 1);
+
+                        subject.innerText = "Multiplication";
+                        newcorrectA = xA * yA
+                        correctA = newcorrectA
+                        question.innerText = "What is " + xA + " * " + yA + " = ?";
+                    }
+
+                    if (qCounter > 15) {
+                        xA = Math.floor((Math.random() * 10) + 1);
+                        yA = Math.floor((Math.random() * 10) + 1);
+
+                        subject.innerText = "Division";
+                        newcorrectA = xA / yA
+                        correctA = newcorrectA
+                        question.innerText = "What is " + xA + " / " + yA + " = ?";
+                    }
+
+                    if (qCounter >= 20) {
+                        nextBtn.innerText = "Result"
+
+                        if (nextBtn.innerText == "Result") {
+                            nextBtn.addEventListener("click", () => {
+                                let addCalculationTest = (additionPoints / 5) * 100
+                                let subCalculationTest = (substractionPoints / 5) * 100
+                                let multiCalculationTest = (multiplicationPoints / 5) * 100
+                                let divisionCalculationTest = (divisionPoints / 5) * 100
+                                let totalResult = (rightAcounter / 20) * 100
+
+                                //Addition result
+                                let additionResult = document.createElement("div");
+                                additionResult.setAttribute("id", "addResult");
+                                box.appendChild(additionResult);
+
+                                let subjectResult = document.createElement("h3");
+                                subjectResult.setAttribute("id", "subjectResult");
+                                subjectResult.innerText = "Addition";
+                                additionResult.appendChild(subjectResult);
+
+                                let addResText = document.createElement("p");
+                                addResText.setAttribute("id", "addResText");
+                                addResText.innerText = "You got " + addCalculationTest + "%";
+                                additionResult.appendChild(addResText);
+
+                                //Substraction result
+                                let substractionResult = document.createElement("div");
+                                substractionResult.setAttribute("id", "subResult");
+                                box.appendChild(substractionResult);
+
+                                let substractionSubjectResult = document.createElement("h3");
+                                substractionSubjectResult.setAttribute("id", "substractionsubjectResult");
+                                substractionSubjectResult.innerText = "Substraction";
+                                substractionResult.appendChild(substractionSubjectResult);
+
+                                let subResText = document.createElement("p");
+                                subResText.setAttribute("id", "subResText");
+                                subResText.innerText = "You got " + subCalculationTest + "%";
+                                substractionResult.appendChild(subResText);
+
+                                // Multiplication result
+                                let multiplicationResult = document.createElement("div");
+                                multiplicationResult.setAttribute("id", "multiResult");
+                                box.appendChild(multiplicationResult);
+
+                                let mulitSubjectResult = document.createElement("h3");
+                                mulitSubjectResult.setAttribute("id", "multiplicationSubjectResult");
+                                mulitSubjectResult.innerText = "Multiplication";
+                                multiplicationResult.appendChild(mulitSubjectResult);
+
+                                let multiResText = document.createElement("p");
+                                multiResText.setAttribute("id", "multiResText");
+                                multiResText.innerText = "You got " + multiCalculationTest + "%";
+                                multiplicationResult.appendChild(multiResText);
+
+                                //Division result
+                                let divisionResult = document.createElement("div");
+                                divisionResult.setAttribute("id", "divisionResult");
+                                box.appendChild(divisionResult);
+
+                                let divisionSubjectResult = document.createElement("h3");
+                                divisionSubjectResult.setAttribute("id", "divisionSubjectResult");
+                                divisionSubjectResult.innerText = "Division";
+                                divisionResult.appendChild(divisionSubjectResult);
+
+                                let divisionResText = document.createElement("p");
+                                divisionResText.setAttribute("id", "divisionTextRes");
+                                divisionResText.innerText = "You got " + divisionCalculationTest + "%";
+                                divisionResult.appendChild(divisionResText);
+
+                                //Total result
+                                let totalResultDiv = document.createElement("div");
+                                totalResultDiv.setAttribute("id", "totalResultDiv");
+                                box.appendChild(totalResultDiv);
+
+                                let totalResultTitle = document.createElement("h3");
+                                totalResultTitle.setAttribute("id", "totalResultTitle");
+                                totalResultTitle.innerText = "Total result";
+                                totalResultDiv.appendChild(totalResultTitle);
+
+                                let totalResultText = document.createElement("p");
+                                totalResultText.setAttribute("id", "totalResultText");
+                                totalResultText.innerText = "Your total result is " + totalResult + "%";
+                                totalResultDiv.appendChild(totalResultText);
+
+                                //Main menu/restart button
+                                let mainMenuDiv = document.createElement("div");
+                                mainMenuDiv.setAttribute("id", "mainMenuDiv");
+                                box.appendChild(mainMenuDiv);
+
+                                let mainMenuBtn = document.createElement("button");
+                                mainMenuBtn.setAttribute("id", "mainMenuBtn");
+                                mainMenuBtn.innerText = "Main Menu";
+                                mainMenuDiv.appendChild(mainMenuBtn);
+
+                                mainMenuBtn.addEventListener("click", () => {
+                                    rightAcounter = 0
+                                    additionPoints = 0
+                                    substractionPoints = 0
+                                    multiplicationPoints = 0
+                                    divisionPoints = 0
+
+                                    box.appendChild(playContainer);
+                                    box.appendChild(infoContainer);
+
+                                    box.removeChild(additionResult);
+                                    box.removeChild(substractionResult);
+                                    box.removeChild(multiplicationResult);
+                                    box.removeChild(divisionResult);
+                                    box.removeChild(totalResultDiv);
+                                    box.removeChild(mainMenuDiv);
+                                })
+
+                                box.removeChild(container)
+                                box.removeChild(inputContainer)
+                                box.removeChild(nextBtnContainer)
+                                box.removeChild(submitBtnContainer)
+                            })
+                        }
+
+                    }
+                    
+
+                })
+
+                submitBtn.addEventListener("click", function deleted2() {
+                    if (input.value == correctA) {
+                        rightAcounter += 1
+                        console.log("Right answer " + rightAcounter)
+                        if (qCounter <= 5) {
+                            additionPoints += 1
+                        }
+
+                        if (qCounter <= 10 && qCounter > 5) {
+                            substractionPoints += 1
+                        }
+
+                        if (qCounter <= 15 && qCounter > 10) {
+                            multiplicationPoints += 1
+                        }
+
+                        if (qCounter <= 20 && qCounter > 15) {
+                            divisionPoints += 1
+                        }
+                    } else if (input.value != correctA) {
+                        wrongAcounter += 1
+                        console.log("Wrong answer " + wrongAcounter)
+                    }
+
+                    box.removeChild(submitBtnContainer);
+
+                })
+
+            })
+
+            // Info button
+            infoBtn.addEventListener("click", function deleted() {
+
+                box.removeChild(playContainer);
+                box.removeChild(infoContainer);
+
+                let backBtnContainer = document.createElement("div");
+                backBtnContainer.setAttribute("id" ,"backContainer");
+                box.appendChild(backBtnContainer);
+
+                let backBtn = document.createElement("button");
+                backBtn.setAttribute("id", "backBtn");
+                backBtn.innerText = "Back";
+                backBtnContainer.appendChild(backBtn);
+
+                let textContainer = document.createElement("div");
+                textContainer.setAttribute("id", "textContainer");
+                box.appendChild(textContainer);
+
+                let text = document.createElement("p");
+                text.setAttribute("id", "text");
+                text.innerText = "In this quiz there will be questions about basic math quiz. It's going to be about addition, substraction, multiplication and divsion. There will be 5 questions of each subject. After you finnish you will get the result of each subject and the total result. You can redo the quiz but the numbers will be different from last. You can skip the answer but you can't go back so skip wisely. \n \n Good luck!";
+                textContainer.appendChild(text);
+
+                backBtn.addEventListener("click", () => {
+                    box.removeChild(backBtnContainer);
+                    box.removeChild(textContainer);
+                    box.appendChild(playContainer);
+                    box.appendChild(infoContainer);
+                })
+
+            })
+        </script>
+    </body>
+</html>
